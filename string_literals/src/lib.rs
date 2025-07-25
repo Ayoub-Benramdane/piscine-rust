@@ -11,9 +11,13 @@ pub fn contains(v: &str, pat: &str) -> bool {
 }
 
 pub fn split_at(v: &str, index: usize) -> (&str, &str) {
+    if index > v.chars().count() {
+        println!("Error");
+        return ("", "")
+    }
     v.split_at(index)
 }
 
 pub fn find(v: &str, pat: char) -> usize {
-    v.find(pat).expect("")
+    v.find(pat).expect("Error")
 }
