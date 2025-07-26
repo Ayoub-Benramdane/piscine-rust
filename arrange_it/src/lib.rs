@@ -1,21 +1,22 @@
 pub fn arrange_phrase(phrase: &str) -> String {
-    let mut res: String = String::new();
-    let table: Vec<_> = phrase.split(" ").collect();
+    let table: Vec<&str> = phrase.split_whitespace().collect();
+    let mut res = String::new();
     let mut count = 1;
-    let mut i = 0;
-    while i < table.len() {
-        if table[i].contains(&count.to_string()) {
-            for ch in table[i].chars() {
-                if ch != count.to_string().chars().next().expect("") {
-                    res.push(ch);
+
+    while count <= table.len() {
+        let target = count.to_string();
+        for &word in &table {
+            if word.contains(&target) {
+                for ch in word.chars() {
+                    if ch.to_string() != target {
+                        res.push(ch);
+                    }
                 }
+                res.push(' ');
+                break;
             }
-            res.push_str(" ");
-            count += 1;
-            i = 0;
-            continue;
         }
-        i += 1;
+        count += 1;
     }
-    res.trim().to_string()
+    res.trim_end().to_string()
 }
