@@ -1,18 +1,22 @@
 pub fn arrange_phrase(phrase: &str) -> String {
-    let words = phrase.split_whitespace();
-    let mut result = String::new();
-
-    for i in 1..=9 {
-        let digit = (b'0' + i as u8) as char;
-        if let Some(word) = words.clone().find(|w| w.contains(digit)) {
-            for ch in word.chars() {
+    let mut res: String = String::new();
+    let table: Vec<_> = phrase.split_whitespace().collect();
+    let mut count = 1;
+    let mut i = 0;
+    while i < table.len() {
+        let digit = (b'0' + count as u8) as char;
+        if table[i].contains(&digit.to_string()) {
+            for ch in table[i].chars() {
                 if ch != digit {
-                    result.push(ch);
+                    res.push(ch);
                 }
             }
-            result.push(' ');
+            res.push_str(" ");
+            count += 1;
+            i = 0;
+            continue;
         }
+        i += 1;
     }
-
-    result.trim_end().to_string()
+    res.trim().to_string()
 }
