@@ -58,8 +58,5 @@ pub fn edit_distance(source: &str, target: &str) -> usize {
         }
         i += 1;
     }
-    let source_str: String = source_chars.iter().collect();
-    let target_str: String = target_chars.iter().collect();
-    println!("{}, {}", source_str, target_str);
     count
 }
