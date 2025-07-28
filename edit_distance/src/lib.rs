@@ -6,12 +6,11 @@ pub fn edit_distance(source: &str, target: &str) -> usize {
 
     let len_source = source_chars.len();
     let len_target = target_chars.len();
-    let mut  del = 0;
-    let mut source_or_target = "";
+    let mut del: usize;
+    let mut source_or_target = "source";
     let mut count = 0;
     if len_source > len_target {
         del = len_source - len_target;
-        source_or_target = "source"
     } else {
         del = len_target -len_source;
         source_or_target = "target"
