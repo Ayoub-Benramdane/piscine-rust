@@ -57,7 +57,7 @@ impl Form {
             if !valid {
                 return Err(
                     FormError::new(
-                        "name",
+                        "password",
                         self.name.clone(),
                         "Password should be a combination of ASCII numbers, letters and symbols"
                     )
