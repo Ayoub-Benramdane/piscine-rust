@@ -8,7 +8,7 @@ pub struct FormError <'a> {
 
 impl FormError <'static> {
     pub fn new(field_name: &'static str, field_value: String, err: &'static str) -> Self {
-        let now = Local::now();
+        let now = Utc::now();
         Self {
             form_values: (field_name, field_value),
             date: now.format("%Y-%m-%d %H:%M:%S").to_string(),
