@@ -31,7 +31,7 @@ impl Form {
         if self.password.len() < 8 {
             return Err(
                 FormError::new(
-                    "name",
+                    "password",
                     self.name.clone(),
                     "Password should be at least 8 characters long"
                 )
