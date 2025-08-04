@@ -17,7 +17,7 @@ pub fn num_to_ordinal(x: u32) -> String {
             res.push_str("rd");
             return res
         }
-        _ =>{}.
+        _ =>{}
     };
     let mut res = x.to_string();
     res.push_str("th");
