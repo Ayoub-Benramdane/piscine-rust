@@ -1,4 +1,4 @@
-pub fn scytale_cipher(message: &str, num_columns: u32) -> String {
+pub fn scytale_cipher(message: &str, i: usize) -> String {
     if message.is_empty() || message.len() == num_columns as usize {
         return message.to_string();
     }
