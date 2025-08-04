@@ -1,7 +1,7 @@
 pub fn score(s: &str) -> u64 {
     let mut total_score = 0;
     for c in s.chars() {
-        total_score += c.to_ascii_uppercase() {
+        total_score += match c.to_ascii_uppercase() {
             'A' | 'E' | 'I' | 'O' | 'U' | 'L' | 'N' | 'R' | 'S' | 'T' => 1,
             'D' | 'G' => 2,
             'B' | 'C' | 'M' | 'P' => 3,
