@@ -7,9 +7,9 @@ pub fn scytale_cipher(message: &str, i: usize) -> String {
     let rows = (message.len() + columns - 1) / columns;
     
     let mut grid = vec![vec![' '; columns]; rows];
-    for (i, ch) in message.chars().enumerate() {
-        let row = i / columns;
-        let col = i % columns;
+    for (j, ch) in message.chars().enumerate() {
+        let row = j / columns;
+        let col = j % columns;
         grid[row][col] = ch;
     }
 
