@@ -1,5 +1,3 @@
-use std::mem;
-
 pub fn edit_distance(source: &str, target: &str) -> usize {
     let mut source_chars: Vec<char> = source.chars().collect();
     let target_chars: Vec<char> = target.chars().collect();
