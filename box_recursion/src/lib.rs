@@ -1,40 +1,79 @@
-#[derive(Debug, PartialEq)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum Role {
     CEO,
     Manager,
     Worker,
 }
 
-impl From<&str> for Role {}
+impl From<&str> for Role {
+    fn from(role: &str) -> Self {
+        match role {
+            "CEO" => Role::CEO,
+            "Manager" => Role::Manager,
+            "Normal Worker" => Role::Worker,
+            _ => panic!("Unknown role"),
+        }
+    }
+}
 
 #[derive(Debug)]
 pub struct WorkEnvironment {
     pub grade: Link,
 }
 
-pub type Link;
+pub type Link = Option<Box<Worker>>;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Worker {
-    pub role: String,
+    pub role: Role,
     pub name: String,
     pub next: Link,
 }
 
 impl WorkEnvironment {
     pub fn new() -> Self {
-        todo!()
+        WorkEnvironment {
+            grade: None,
+        }
     }
 
     pub fn add_worker(&mut self, name: &str, role: &str) {
-        todo!()
+        let mut new_worker = Worker {
+            role: Role::from(role),
+            name: name.to_string(),
+            next: None,
+        };
+
+        match &self.grade {
+            None => {
+                self.grade = Some(Box::new(new_worker));
+            }
+            Some(worker) => {
+                new_worker.next = Some(worker.clone());
+                self.grade = Some(Box::new(new_worker));
+            }
+        }
     }
 
     pub fn remove_worker(&mut self) -> Option<String> {
-        todo!()
+        match self.grade {
+            None => None,
+            Some(ref mut worker) => {
+                let removed_worker = worker.clone();
+                self.grade = worker.next.take();
+                Some(removed_worker.name)
+            }
+        }
     }
 
     pub fn last_worker(&self) -> Option<(String, Role)> {
-        todo!()
+        let current = &self.grade;
+        match current {
+            None => None,
+            Some(_) => {
+                Some((current.as_ref().unwrap().name.clone(), current.as_ref().unwrap().role.clone()))
+            }
+            
+        }
     }
 }
