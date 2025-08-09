@@ -14,7 +14,11 @@ impl Node {
     }
 
     pub fn rm_all_ref(&mut self, element: Rc<String>) {
-        self.ref_list.retain(|x| !Rc::ptr_eq(x, &element));
+        for i in (0..self.ref_list.len()).rev() {
+            if Rc::ptr_eq(&self.ref_list[i], &element) {
+                self.ref_list.remove(i);
+            }
+        }
     }
 }
 
