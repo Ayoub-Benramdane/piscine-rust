@@ -20,7 +20,7 @@ fn main() {
     };
     println!("Before eating {:?}", player1);
     player1.eat(apple);
-    println!("After eating an apple\n{:?}", player1);
+    println!("After eating an apple\n{}", player1);
     player1.eat(steak);
-    println!("After eating a steak\n{:?}", player1);
+    println!("After eating a steak\n{}", player1);
 }

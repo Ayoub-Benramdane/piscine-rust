@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 #[derive(Debug)]
 pub struct Player {
 	pub name: String,
@@ -37,4 +39,10 @@ impl Food for Meat {
         let meat = self.weight_in_kg - self.fat_content;
         meat*4.+self.fat_content*9.
     }
+}
+
+impl Display for Player {
+	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+		write!(f, "{}\nStrength: {}, Score: {}, Money: {}\nWeapons: {:?}", self.name,self.strength , self.score, self.money, self.weapons)
+	}
 }
