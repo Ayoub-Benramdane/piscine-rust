@@ -51,11 +51,11 @@ fn test_gives() {
     };
     assert_eq!(steak.gives(), 4.0);
 
-    // let steak = Meat {
-    //     weight_in_kg: 1.5,
-    //     fat_content: 0.3,
-    // };
-    // assert_eq!(steak.gives(), 8.25);
+    let steak = Meat {
+        weight_in_kg: 1.5,
+        fat_content: 0.3,
+    };
+    assert_eq!(steak.gives(), 8.25);
 }
 
 #[test]

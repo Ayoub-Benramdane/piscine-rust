@@ -36,12 +36,7 @@ impl Food for Fruit {
 
 impl Food for Meat {
     fn gives(&self) -> f64 {
-		let meat = self.weight_in_kg - self.fat_content;
-        if self.fat_content == 0.0 {
-            meat * 4.0
-        } else {
-            meat * 4.0 + self.fat_content * 5.0 + 4.0
-        }
+		4.*self.weight_in_kg*(1.-self.fat_content)+9.*self.weight_in_kg*self.fat_content
     }
 }
 
