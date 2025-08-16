@@ -36,15 +36,15 @@ where
         }
     }
 
-    pub fn row(&self, index: usize) -> Option<Vec<T>> {
-        self.0.get(index).cloned()
+    pub fn row(&self, index: usize) -> Vec<T> {
+        self.0.get(index).cloned().expect("")
     }
 
-    pub fn col(&self, index: usize) -> Option<Vec<T>> {
+    pub fn col(&self, index: usize) -> Vec<T> {
         if index >= self.number_of_cols() {
-            return None;
+            return vec![];
         }
-        Some(self.0.iter().map(|row| row[index].clone()).collect())
+        self.0.iter().map(|row| row[index].clone()).collect()
     }
 }
 
@@ -52,11 +52,11 @@ impl<T> Mul<Matrix<T>> for Matrix<T>
 where
     T: Scalar<Item = T> + Add<Output = T> + Clone + Mul<Output = T>,
 {
-    type Output = Result<Matrix<T>, &'static str>;
+    type Output = Option<Matrix<T>>;
 
     fn mul(self, other: Matrix<T>) -> Self::Output {
         if self.number_of_cols() != other.number_of_rows() {
-            return Err("Matrix dimensions do not match for multiplication");
+            return None;
         }
 
         let rows = self.number_of_rows();
@@ -73,6 +73,6 @@ where
             }
         }
 
-        Ok(result)
+        Some(result)
     }
 }
