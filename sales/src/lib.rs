@@ -27,24 +27,22 @@ impl Cart {
         self.items.push((ele, price))
     }
     pub fn generate_receipt(&mut self) -> Vec<f32> {
+        let _ = |x: f32| -> f32 { (x * 100.0).round() / 100.0 };
+
         let mut a = vec![];
         for (_, v) in &self.items {
             a.push(*v);
         }
         a.sort_by(|a, b| a.partial_cmp(b).unwrap());
-        let mut b = vec![];
-        for aa in &a {
-            let j = *aa - (*aa * a[0]) / a.iter().sum::<f32>();
-            b.push(format(j));
+
+        let mut receipt = vec![];
+
+        let i = a[0..a.len() / 3].iter().sum::<f32>() / a.iter().sum::<f32>();
+
+        for val in &a {
+            receipt.push(((*val - *val * i) * 100.0).round() / 100.0);
         }
-
-        self.receipt = b.clone();
-        b
+        self.receipt = receipt.clone();
+        receipt
     }
-}
-
-pub fn format(a: f32) -> f32 {
-    let ab = format!("{:.02}", a);
-    let c = ab.parse::<f32>().unwrap_or(0.0);
-    c
 }
